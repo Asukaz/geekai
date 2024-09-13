@@ -16,6 +16,21 @@ services:
       - ./logs/mysql:/var/log/mysql
       - ./data/mysql/init.d:/docker-entrypoint-initdb.d/
 
+  # phpMyAdmin
+  geekai-phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: geekai-phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: geekai-mysql
+      MYSQL_ROOT_PASSWORD: 12345678
+    ports:
+      - "8083:80"
+    depends_on:
+      - geekai-mysql
+    volumes:
+      - ./logs/phpmyadmin:/var/log/phpmyadmin
+
   # redis
   geekai-redis:
     image: registry.cn-shenzhen.aliyuncs.com/geekmaster/redis:6.0.6
@@ -74,7 +89,7 @@ services:
 
   # 前端应用
   geekai-web:
-    image: registry.cn-shenzhen.aliyuncs.com/geekmaster/geekai-web:v4.0.9-amd64
+    image: asukaz/chatgpt-plus-web:cz0.1
     container_name: geekai-web
     restart: always
     depends_on:
