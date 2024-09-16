@@ -89,7 +89,7 @@ services:
 
   # 前端应用
   geekai-web:
-    image: asukaz/chatgpt-plus-web:cz0.1
+    image: asukaz/chatgpt-plus-web:latest
     container_name: geekai-web
     restart: always
     depends_on:
